@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.davidthigpen.receiptreader.data.database.DatabaseHelper;
 import com.davidthigpen.receiptreader.data.database.AppDatabase;
 import com.davidthigpen.receiptreader.data.model.Receipt;
-import com.davidthigpen.receiptreader.ui.camera.CameraMode;
+
 import com.davidthigpen.receiptreader.ui.receiptview.ReceiptItemsActivity;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class ReceiptsHome extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newReceiptByCamera();
+                
             }
         });
         mRecyclerView = findViewById(R.id.receipt_recycler_view);
@@ -104,10 +104,6 @@ public class ReceiptsHome extends AppCompatActivity {
     public void viewReceiptDetail(Receipt receipt){
         Intent intent = new Intent(ReceiptsHome.this, ReceiptItemsActivity.class);
         intent.putExtra(EXTRA_RECEIPT_ID,receipt.getId());
-        startActivity(intent);
-    }
-    public void newReceiptByCamera(){
-        Intent intent = new Intent(this, CameraMode.class);
         startActivity(intent);
     }
 
