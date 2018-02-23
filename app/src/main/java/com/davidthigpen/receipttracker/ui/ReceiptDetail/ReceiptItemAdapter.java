@@ -1,6 +1,7 @@
 package com.davidthigpen.receipttracker.ui.ReceiptDetail;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.davidthigpen.receipttracker.R;
 import com.davidthigpen.receipttracker.data.model.ReceiptItem;
+import com.davidthigpen.receipttracker.databinding.RowReceiptItemBinding;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -17,15 +19,14 @@ import java.util.List;
  * Created by david on 1/14/18.
  */
 
-public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.ViewHolder> {
+public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.ItemViewHolder> {
 
     private List<ReceiptItem> mReceiptItems;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ReceiptItemsActivity.ReceiptItemClickListener mReceiptClickListener;
 
-    public ReceiptItemAdapter(Context context, List<ReceiptItem> receiptItems, ReceiptItemsActivity.ReceiptItemClickListener receiptItemClickListener){
-        mContext = context;
+    public ReceiptItemAdapter( List<ReceiptItem> receiptItems, ReceiptItemsActivity.ReceiptItemClickListener receiptItemClickListener){
         setList(receiptItems);
         mReceiptClickListener = receiptItemClickListener;
 
@@ -50,20 +51,23 @@ public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         mLayoutInflater = LayoutInflater.from(mContext);
-        View receiptItemView = mLayoutInflater.inflate(R.layout.row_receipt_item,parent,false);
-         return new ViewHolder(receiptItemView);
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+         mLayoutInflater = LayoutInflater.from(parent.getContext());
+        RowReceiptItemBinding binding = DataBindingUtil.inflate(mLayoutInflater,R.layout.row_receipt_item,parent,false);
+
+//        View receiptItemView = mLayoutInflater.inflate(R.layout.row_receipt_item,parent,false);
+         return new ItemViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ItemViewHolder holder, int position) {
        ReceiptItem item = mReceiptItems.get(position);
 
-        holder.itemNameText.setText(item.getItemName() != null ? item.getItemName() : ("Id: " + item.getId()));
-        NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        String dollarsString = formatter.format(item.getPrice());
-        holder.itemDollarAmount.setText(dollarsString);
+//        holder.itemNameText.setText(item.getItemName() != null ? item.getItemName() : ("Id: " + item.getId()));
+//        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+//        String dollarsString = formatter.format(item.getPrice());
+//        holder.itemDollarAmount.setText(dollarsString);
+        holder.bindItem(item);
 
     }
 
@@ -75,23 +79,24 @@ public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ItemViewHolder extends RecyclerView.ViewHolder{
+        final RowReceiptItemBinding binding;
 
-        private View mView;
-        private TextView itemNameText;
-        private TextView itemDollarAmount;
+        public ItemViewHolder(final RowReceiptItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-            itemNameText = itemView.findViewById(R.id.item_name);
-            itemDollarAmount = itemView.findViewById(R.id.item_price);
-            mView.setOnClickListener(new View.OnClickListener() {
+            this.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
-                    mReceiptClickListener.onItemClicked(getAdapterPosition(),mReceiptItems.get(getAdapterPosition()));
+                    mReceiptClickListener.onItemClicked(binding.getItem());
                 }
             });
+        }
+        void bindItem(ReceiptItem item){
+            binding.setItem(item);
+            binding.executePendingBindings();
         }
     }
 
