@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.davidthigpen.receipttracker.R;
 import com.davidthigpen.receipttracker.BR;
 import com.davidthigpen.receipttracker.data.model.Receipt;
+import com.davidthigpen.receipttracker.databinding.RowSimpleBinding;
 
 //import com.davidthigpen.receipttracker.databinding.RowSimpleBinding;
 
@@ -56,7 +57,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ReceiptV
     @Override
     public ReceiptViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater,R.layout.row_simple,parent, false);
+        RowSimpleBinding binding = DataBindingUtil.inflate(layoutInflater,R.layout.row_simple,parent, false);
 
          return new ReceiptViewHolder(binding);
     }
@@ -76,13 +77,13 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ReceiptV
     }
 
     public class ReceiptViewHolder extends RecyclerView.ViewHolder{
-            ViewDataBinding binding;
-        public ReceiptViewHolder(ViewDataBinding binding) {
+            RowSimpleBinding binding;
+        public ReceiptViewHolder(RowSimpleBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
         void bindItem(Receipt receipt){
-            binding.setVariable(BR.receipt, receipt);
+            binding.setReceipt(receipt);
             binding.executePendingBindings();
         }
     }
