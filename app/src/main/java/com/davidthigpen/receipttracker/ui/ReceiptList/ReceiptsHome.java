@@ -1,6 +1,7 @@
 package com.davidthigpen.receipttracker.ui.ReceiptList;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,8 @@ import com.davidthigpen.receipttracker.data.database.DatabaseHelper;
 import com.davidthigpen.receipttracker.data.database.AppDatabase;
 import com.davidthigpen.receipttracker.data.model.Receipt;
 
+import com.davidthigpen.receipttracker.databinding.ActivityReceiptsHomeBinding;
+
 import com.davidthigpen.receipttracker.ui.ReceiptDetail.ReceiptItemsActivity;
 
 import java.util.ArrayList;
@@ -28,10 +31,7 @@ public class ReceiptsHome extends AppCompatActivity {
     public static final String TAG = ReceiptsHome.class.getSimpleName();
     public static final String EXTRA_RECEIPT_ID = "com.davidthigpen.receiptreader.RECEIPT_ID";
 
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLinearLayoutManager;
-    private ReceiptAdapter mReceiptAdapter;
-    private List<Receipt> mReceiptList = new ArrayList<>();
+    private ActivityReceiptsHomeBinding binding;
     private DatabaseHelper mDatabaseHelper;
 
     private ReceiptClickListener mReceiptClickListener = new ReceiptClickListener() {
@@ -44,30 +44,21 @@ public class ReceiptsHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_receipts_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mDatabaseHelper  = new DatabaseHelper(AppDatabase.getInMemoryDatabase(this));
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
-        });
-        mRecyclerView = findViewById(R.id.receipt_list);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
-                mLinearLayoutManager.getOrientation());
-        mRecyclerView.addItemDecoration(mDividerItemDecoration);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_receipts_home);
+        binding.receiptList.setLayoutManager(new LinearLayoutManager(this));
+        setSupportActionBar(binding.toolbar);
 
-        //populateAndLoad with fake data then load
+        mDatabaseHelper  = new DatabaseHelper(AppDatabase.getInMemoryDatabase(this));
+
         populateAndLoad();
-        mReceiptAdapter = new ReceiptAdapter(mReceiptList, mReceiptClickListener);
-        mRecyclerView.setAdapter(mReceiptAdapter);
     }
 
+    private void displayItems(List<Receipt> items){
+        Log.d(TAG,"displayItems: " + items.size());
+        binding.receiptList.setAdapter(new ReceiptAdapter(items, mReceiptClickListener));
+        binding.receiptList.setLayoutManager(new LinearLayoutManager(this));
+
+    }
     private void loadReceiptData(){
         FetchReceiptData task = new FetchReceiptData();
         task.execute();
@@ -98,8 +89,8 @@ public class ReceiptsHome extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Receipt> receipts) {
             Log.d("ReceiptsHome","Receipts Size: " + receipts.size());
-            mReceiptList = receipts;
-            mReceiptAdapter.setList(receipts);
+            displayItems(receipts);
+
         }
     }
     public void viewReceiptDetail(Receipt receipt){

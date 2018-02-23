@@ -6,6 +6,7 @@ import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.davidthigpen.receipttracker.R;
@@ -75,10 +76,17 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ReceiptV
     }
 
     public class ReceiptViewHolder extends RecyclerView.ViewHolder{
-            RowSimpleBinding binding;
-        public ReceiptViewHolder(RowSimpleBinding binding) {
+            final RowSimpleBinding binding;
+        public ReceiptViewHolder(final RowSimpleBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            this.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    mReceiptClickListener.onReceiptClicked(binding.getReceipt());
+                }
+            });
         }
         void bindItem(Receipt receipt){
             binding.setReceipt(receipt);
