@@ -54,8 +54,6 @@ public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
          mLayoutInflater = LayoutInflater.from(parent.getContext());
         RowReceiptItemBinding binding = DataBindingUtil.inflate(mLayoutInflater,R.layout.row_receipt_item,parent,false);
-
-//        View receiptItemView = mLayoutInflater.inflate(R.layout.row_receipt_item,parent,false);
          return new ItemViewHolder(binding);
     }
 
@@ -63,10 +61,6 @@ public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.
     public void onBindViewHolder(ItemViewHolder holder, int position) {
        ReceiptItem item = mReceiptItems.get(position);
 
-//        holder.itemNameText.setText(item.getItemName() != null ? item.getItemName() : ("Id: " + item.getId()));
-//        NumberFormat formatter = NumberFormat.getCurrencyInstance();
-//        String dollarsString = formatter.format(item.getPrice());
-//        holder.itemDollarAmount.setText(dollarsString);
         holder.bindItem(item);
 
     }

@@ -49,7 +49,6 @@ public class ReceiptItemsActivity extends AppCompatActivity{
     public static final String ITEM_SPLITTER_IDS_EXTRA = "com.davidthigpen.receiptreader.ITEM_SPLITTER_IDS_EXTRA";
 
     private ActivityReceiptItemsBinding binding;
-    Receipt mReceipt;
     List<ReceiptItem> mReceiptItems = new ArrayList<>();
     ReceiptItemAdapter mReceiptItemsAdapter;
     private DatePickerDialog mDatePickerDialog;
@@ -91,15 +90,6 @@ public class ReceiptItemsActivity extends AppCompatActivity{
         binding = DataBindingUtil.setContentView(this,R.layout.activity_receipt_items);
         setSupportActionBar(binding.toolbar);
 
-
-        binding.receiptDateEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDatePicker();
-            }
-        });
-
-
         Intent intent = getIntent();
         mReceiptId = intent.getStringExtra(EXTRA_RECEIPT_ID);
         if(mReceiptId != null){
@@ -107,10 +97,13 @@ public class ReceiptItemsActivity extends AppCompatActivity{
         }else{
             Log.d(TAG,"Error no receipt id");
         }
-
-
+        binding.receiptDateEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker();
+            }
+        });
         binding.receiptItemsList.setLayoutManager(new LinearLayoutManager(this));
-
         mReceiptItemsAdapter  = new ReceiptItemAdapter(mReceiptItems, mItemClickListener);
         binding.receiptItemsList.setAdapter(mReceiptItemsAdapter);
 
@@ -143,8 +136,6 @@ public class ReceiptItemsActivity extends AppCompatActivity{
                 calendarNow.get(Calendar.DAY_OF_MONTH));
         mDatePickerDialog.show();
     }
-
-    //TODO load all at once or break up
     public void loadReceiptsData(final String receiptId){
         new AsyncTask<Void,Void,Receipt>(){
             @Override
@@ -158,10 +149,6 @@ public class ReceiptItemsActivity extends AppCompatActivity{
                     binding.setReceipt(receipt);
                     mReceiptItems = receipt.getReceiptItems();
                     mReceiptItemsAdapter.setList(receipt.getReceiptItems());
-
-//                    binding.storeNameEdit.setText(mReceipt.getStore());
-                    //TODO format date text
-//                    binding.receiptDateEdit.setText(DateFormatter.dateToString(mReceipt.getReceiptDate()));
                 }
             }
         }.execute();

@@ -59,9 +59,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ReceiptV
     @Override
     public void onBindViewHolder(ReceiptViewHolder holder, int position) {
         Receipt item = mReceipts.get(position);
-
-        ReceiptViewHolder receiptViewHolder = (ReceiptViewHolder) holder;
-        receiptViewHolder.bindItem(item);
+        holder.bindItem(item);
 
     }
 
