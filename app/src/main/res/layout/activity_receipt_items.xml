@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/price_subtotal_label"
-                    android:text='@{String.format("%.2f",receipt.priceTotal)}'
+                    android:text='@{String.format("%.2f",receipt.priceSubtotal)}'
                     android:textSize="18dp"
                     />
                 <TextView
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/price_total_label"
-                    android:text='@{String.format("%.2f",receipt.priceTotal + 0.00)}'
+                    android:text='@{String.format("%.2f",receipt.priceSubtotal + 0.00)}'
                     android:textSize="18dp"
                     />
 

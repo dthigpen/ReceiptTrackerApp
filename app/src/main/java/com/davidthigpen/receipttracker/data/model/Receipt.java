@@ -32,8 +32,10 @@ public class Receipt {
     private Date entryDate;
     @ColumnInfo(name = "receipt_date")
     private Date receiptDate;
-    @ColumnInfo(name = "price_total")
-    private double priceTotal;
+    @ColumnInfo(name = "price_subtotal")
+    private double priceSubtotal;
+    private double tax;
+
     @Ignore
     private List<ReceiptItem> mReceiptItems;
 
@@ -93,12 +95,20 @@ public class Receipt {
         this.receiptDate = receiptDate;
     }
 
-    public double getPriceTotal() {
-        return priceTotal;
+    public double getPriceSubtotal() {
+        return priceSubtotal;
     }
 
-    public void setPriceTotal(double priceTotal) {
-        this.priceTotal = priceTotal;
+    public void setPriceSubtotal(double priceSubtotal) {
+        this.priceSubtotal = priceSubtotal;
+    }
+
+    public double getTax() {
+        return tax;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
     }
 
     public List<ReceiptItem> getReceiptItems() {

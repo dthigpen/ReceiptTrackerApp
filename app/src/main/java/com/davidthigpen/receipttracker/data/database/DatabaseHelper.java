@@ -177,7 +177,7 @@ public class DatabaseHelper {
                 receipt.setStore("Store " + i);
                 receipt.setEntryDate(new Date(System.currentTimeMillis()));
                 receipt.setReceiptDate(new Date(System.currentTimeMillis()));
-                receipt.setPriceTotal(i*10.00);
+                receipt.setPriceSubtotal(i*10.00);
                 db.getReceiptDao().insertReceipt(receipt);
                 Log.d("DatabaseHelper", "Poplulate, new receipt id: " + receipt.getId());
                 for (int j = 1; j <= 4; j++) {

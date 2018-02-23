@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/store_name"
-        android:text='@{String.format("%.2f", receipt.priceTotal)}'/>
+        android:text='@{String.format("%.2f", receipt.priceSubtotal + receipt.tax)}'/>
 
 
 </android.support.constraint.ConstraintLayout>
