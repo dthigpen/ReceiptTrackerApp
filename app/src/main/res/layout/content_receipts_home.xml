@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.davidthigpen.receiptreader.ReceiptsHome"
+    tools:context="com.davidthigpen.receiptreader.ui.ReceiptList.ReceiptsHome"
     tools:showIn="@layout/activity_receipts_home">
 
 

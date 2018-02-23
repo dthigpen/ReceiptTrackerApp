@@ -1,7 +1,6 @@
 package com.davidthigpen.receiptreader.ui.EditItem;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davidthigpen.receiptreader.R;
-import com.davidthigpen.receiptreader.ui.receiptview.ReceiptItemsActivity;
-
-import org.w3c.dom.Text;
+import com.davidthigpen.receiptreader.ui.ReceiptDetail.ReceiptItemsActivity;
 
 import java.util.ArrayList;
 

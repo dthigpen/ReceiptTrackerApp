@@ -24,7 +24,7 @@
         </provider>
 
         <activity
-            android:name=".ReceiptsHome"
+            android:name=".ui.ReceiptList.ReceiptsHome"
             android:label="@string/title_activity_receipts_home"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.receiptview.ReceiptItemsActivity"
+            android:name=".ui.ReceiptDetail.ReceiptItemsActivity"
             android:label="@string/title_activity_receipt_items"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

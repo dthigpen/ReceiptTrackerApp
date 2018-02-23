@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader;
+package com.davidthigpen.receiptreader.ui.ReceiptList;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,11 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.davidthigpen.receiptreader.R;
 import com.davidthigpen.receiptreader.data.database.DatabaseHelper;
 import com.davidthigpen.receiptreader.data.database.AppDatabase;
 import com.davidthigpen.receiptreader.data.model.Receipt;
 
-import com.davidthigpen.receiptreader.ui.receiptview.ReceiptItemsActivity;
+import com.davidthigpen.receiptreader.ui.ReceiptDetail.ReceiptItemsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

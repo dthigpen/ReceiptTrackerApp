@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.ui.receiptview;
+package com.davidthigpen.receiptreader.ui.ReceiptDetail;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

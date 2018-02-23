@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.ui.receiptview;
+package com.davidthigpen.receiptreader.ui.ReceiptDetail;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -32,7 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.davidthigpen.receiptreader.ReceiptsHome.EXTRA_RECEIPT_ID;
+import static com.davidthigpen.receiptreader.ui.ReceiptList.ReceiptsHome.EXTRA_RECEIPT_ID;
 
 public class ReceiptItemsActivity extends AppCompatActivity{
 
