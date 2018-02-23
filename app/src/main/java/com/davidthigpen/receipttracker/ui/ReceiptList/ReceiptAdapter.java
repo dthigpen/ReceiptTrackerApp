@@ -1,8 +1,6 @@
 package com.davidthigpen.receipttracker.ui.ReceiptList;
 
-import android.app.Activity;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.davidthigpen.receipttracker.R;
-import com.davidthigpen.receipttracker.BR;
 import com.davidthigpen.receipttracker.data.model.Receipt;
 import com.davidthigpen.receipttracker.databinding.RowSimpleBinding;
-
-//import com.davidthigpen.receipttracker.databinding.RowSimpleBinding;
 
 import java.util.List;
 

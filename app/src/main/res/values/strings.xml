@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">ReceiptReader</string>
-    <string name="action_settings">Settings</string>
-    <string name="album_name">Receipts</string>
     <string name="ok">Save</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_receipts_home">My Receipts</string>
