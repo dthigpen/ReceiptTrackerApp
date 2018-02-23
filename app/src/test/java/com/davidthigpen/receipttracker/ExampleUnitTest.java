@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader;
+package com.davidthigpen.receipttracker;
 
 import org.junit.Test;
 

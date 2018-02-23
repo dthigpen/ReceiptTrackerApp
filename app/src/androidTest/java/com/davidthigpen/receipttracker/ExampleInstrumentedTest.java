@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader;
+package com.davidthigpen.receipttracker;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

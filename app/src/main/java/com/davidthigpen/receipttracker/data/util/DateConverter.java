@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.data.util;
+package com.davidthigpen.receipttracker.data.util;
 
 import android.arch.persistence.room.TypeConverter;
 

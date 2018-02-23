@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.davidthigpen.receiptreader">
+          package="com.davidthigpen.receipttracker">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -24,7 +24,7 @@
         </provider>
 
         <activity
-            android:name=".ui.ReceiptList.ReceiptsHome"
+            android:name="com.davidthigpen.receipttracker.ui.ReceiptList.ReceiptsHome"
             android:label="@string/title_activity_receipts_home"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,11 +34,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ReceiptDetail.ReceiptItemsActivity"
+            android:name="com.davidthigpen.receipttracker.ui.ReceiptDetail.ReceiptItemsActivity"
             android:label="@string/title_activity_receipt_items"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.EditItem.EditItemActivity">
+        <activity android:name="com.davidthigpen.receipttracker.ui.EditItem.EditItemActivity">
         </activity>
     </application>
 

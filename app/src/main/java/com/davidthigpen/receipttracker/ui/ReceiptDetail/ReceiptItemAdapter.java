@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.ui.ReceiptDetail;
+package com.davidthigpen.receipttracker.ui.ReceiptDetail;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.davidthigpen.receiptreader.R;
-import com.davidthigpen.receiptreader.data.model.ReceiptItem;
+import com.davidthigpen.receipttracker.R;
+import com.davidthigpen.receipttracker.data.model.ReceiptItem;
 
 import java.text.NumberFormat;
 import java.util.List;

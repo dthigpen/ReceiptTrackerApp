@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.data.database;
+package com.davidthigpen.receipttracker.data.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -7,8 +7,8 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
 import android.arch.persistence.room.Update;
 
-import com.davidthigpen.receiptreader.data.model.ReceiptItem;
-import com.davidthigpen.receiptreader.data.util.DateConverter;
+import com.davidthigpen.receipttracker.data.model.ReceiptItem;
+import com.davidthigpen.receipttracker.data.util.DateConverter;
 
 import java.util.List;
 

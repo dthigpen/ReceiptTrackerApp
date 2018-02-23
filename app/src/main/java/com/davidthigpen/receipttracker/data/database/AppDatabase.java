@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.data.database;
+package com.davidthigpen.receipttracker.data.database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -6,11 +6,11 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-import com.davidthigpen.receiptreader.data.model.Receipt;
-import com.davidthigpen.receiptreader.data.model.ReceiptItem;
-import com.davidthigpen.receiptreader.data.model.ReceiptItemSplitterJoin;
-import com.davidthigpen.receiptreader.data.model.Splitter;
-import com.davidthigpen.receiptreader.data.util.DateConverter;
+import com.davidthigpen.receipttracker.data.model.Receipt;
+import com.davidthigpen.receipttracker.data.model.ReceiptItem;
+import com.davidthigpen.receipttracker.data.model.ReceiptItemSplitterJoin;
+import com.davidthigpen.receipttracker.data.model.Splitter;
+import com.davidthigpen.receipttracker.data.util.DateConverter;
 
 /**
  * Created by david on 2/8/18.

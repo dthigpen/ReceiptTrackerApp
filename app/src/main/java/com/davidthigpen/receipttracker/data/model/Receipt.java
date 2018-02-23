@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.data.model;
+package com.davidthigpen.receipttracker.data.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
-import com.davidthigpen.receiptreader.data.util.DateConverter;
+import com.davidthigpen.receipttracker.data.util.DateConverter;
 
 import java.util.ArrayList;
 import java.util.Date;

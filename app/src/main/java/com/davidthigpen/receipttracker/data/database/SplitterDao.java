@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.data.database;
+package com.davidthigpen.receipttracker.data.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.davidthigpen.receiptreader.data.model.Splitter;
+import com.davidthigpen.receipttracker.data.model.Splitter;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.ui.ReceiptList;
+package com.davidthigpen.receipttracker.ui.ReceiptList;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,12 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.davidthigpen.receiptreader.R;
-import com.davidthigpen.receiptreader.data.database.DatabaseHelper;
-import com.davidthigpen.receiptreader.data.database.AppDatabase;
-import com.davidthigpen.receiptreader.data.model.Receipt;
+import com.davidthigpen.receipttracker.R;
+import com.davidthigpen.receipttracker.data.database.DatabaseHelper;
+import com.davidthigpen.receipttracker.data.database.AppDatabase;
+import com.davidthigpen.receipttracker.data.model.Receipt;
 
-import com.davidthigpen.receiptreader.ui.ReceiptDetail.ReceiptItemsActivity;
+import com.davidthigpen.receipttracker.ui.ReceiptDetail.ReceiptItemsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class ReceiptsHome extends AppCompatActivity {
                 
             }
         });
-        mRecyclerView = findViewById(R.id.receipt_recycler_view);
+        mRecyclerView = findViewById(R.id.receipt_list);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),

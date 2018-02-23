@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.ui.ReceiptDetail;
+package com.davidthigpen.receipttracker.ui.ReceiptDetail;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -19,20 +19,20 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import com.davidthigpen.receiptreader.R;
-import com.davidthigpen.receiptreader.data.database.AppDatabase;
-import com.davidthigpen.receiptreader.data.database.DatabaseHelper;
-import com.davidthigpen.receiptreader.data.model.Receipt;
-import com.davidthigpen.receiptreader.data.model.ReceiptItem;
-import com.davidthigpen.receiptreader.data.util.DateFormatter;
-import com.davidthigpen.receiptreader.ui.EditItem.EditItemActivity;
+import com.davidthigpen.receipttracker.R;
+import com.davidthigpen.receipttracker.data.database.AppDatabase;
+import com.davidthigpen.receipttracker.data.database.DatabaseHelper;
+import com.davidthigpen.receipttracker.data.model.Receipt;
+import com.davidthigpen.receipttracker.data.model.ReceiptItem;
+import com.davidthigpen.receipttracker.data.util.DateFormatter;
+import com.davidthigpen.receipttracker.ui.EditItem.EditItemActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.davidthigpen.receiptreader.ui.ReceiptList.ReceiptsHome.EXTRA_RECEIPT_ID;
+import static com.davidthigpen.receipttracker.ui.ReceiptList.ReceiptsHome.EXTRA_RECEIPT_ID;
 
 public class ReceiptItemsActivity extends AppCompatActivity{
 

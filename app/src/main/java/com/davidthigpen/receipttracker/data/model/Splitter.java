@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.data.model;
+package com.davidthigpen.receipttracker.data.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

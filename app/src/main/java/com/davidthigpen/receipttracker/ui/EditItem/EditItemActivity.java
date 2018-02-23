@@ -1,4 +1,4 @@
-package com.davidthigpen.receiptreader.ui.EditItem;
+package com.davidthigpen.receipttracker.ui.EditItem;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.davidthigpen.receiptreader.R;
-import com.davidthigpen.receiptreader.ui.ReceiptDetail.ReceiptItemsActivity;
+import com.davidthigpen.receipttracker.R;
+import com.davidthigpen.receipttracker.ui.ReceiptDetail.ReceiptItemsActivity;
 
 import java.util.ArrayList;
 

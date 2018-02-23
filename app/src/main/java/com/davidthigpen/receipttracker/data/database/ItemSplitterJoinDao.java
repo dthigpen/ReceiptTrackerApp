@@ -1,12 +1,12 @@
-package com.davidthigpen.receiptreader.data.database;
+package com.davidthigpen.receipttracker.data.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.davidthigpen.receiptreader.data.model.ReceiptItem;
-import com.davidthigpen.receiptreader.data.model.ReceiptItemSplitterJoin;
-import com.davidthigpen.receiptreader.data.model.Splitter;
+import com.davidthigpen.receipttracker.data.model.ReceiptItem;
+import com.davidthigpen.receipttracker.data.model.ReceiptItemSplitterJoin;
+import com.davidthigpen.receipttracker.data.model.Splitter;
 
 import java.util.List;
 

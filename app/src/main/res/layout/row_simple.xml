@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="receipt"
+            type="com.davidthigpen.receipttracker.data.model.Receipt"/>
+
+    </data>
+
 <android.support.constraint.ConstraintLayout
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,37 +16,38 @@
     android:paddingEnd="?attr/listPreferredItemPaddingRight"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
     android:paddingRight="?attr/listPreferredItemPaddingRight"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    >
 
-    <TextView android:id="@+id/title"
+    <TextView android:id="@+id/store_name"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="8dp"
               android:textAppearance="?attr/textAppearanceListItem"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              android:text="Sample Title"
+              android:text="@{receipt.store}"
         />
     <TextView
         android:id="@+id/subtitle"
-        android:layout_width="352dp"
-        android:layout_height="wrap_content"
-        android:text="01/01/1970"
-        android:textAppearance="?attr/textAppearanceListItemSecondary"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:layout_editor_absoluteX="16dp"/>
-    <TextView
-        android:id="@+id/right_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$123.12"
+        android:textAppearance="?attr/textAppearanceListItemSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/store_name"
+        android:text="02/22/2018"
+        />
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title"/>
-        />
+        app:layout_constraintTop_toTopOf="@id/store_name"
+        android:text='@{String.format("%.2f", receipt.priceTotal)}'/>
+
 
 </android.support.constraint.ConstraintLayout>
+</layout>
