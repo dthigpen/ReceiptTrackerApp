@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <!--<data>-->
-        <!--<variable-->
-            <!--name="receipt"-->
-            <!--type="com.davidthigpen.receipttracker.data.model.Receipt"/>-->
-    <!--</data>-->
+    <data>
+        <import type="com.davidthigpen.receipttracker.data.util.DateFormatter"/>
+        <variable
+            name="receipt"
+            type="com.davidthigpen.receipttracker.data.model.Receipt"/>
+    </data>
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -45,8 +46,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 >
-
-
                 <LinearLayout
                     android:id="@+id/store_details_containter"
                     android:layout_width="match_parent"
@@ -68,7 +67,7 @@
                         android:id="@+id/store_name_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Whole Foods"
+                        android:text="@{receipt.store}"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="18dp"
                         android:focusedByDefault="false"
@@ -89,8 +88,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="date"
-                    android:hint="01/18/2018"
                     android:textSize="18dp"
+                    android:text="@{DateFormatter.dateToString(receipt.entryDate)}"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintLeft_toRightOf="@id/receipt_date_label"
                     app:layout_constraintTop_toBottomOf="@id/store_details_containter"
@@ -125,7 +124,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/price_subtotal_label"
-                    android:text="63.25"
+                    android:text='@{String.format("%.2f",receipt.priceTotal)}'
                     android:textSize="18dp"
                     />
                 <TextView
@@ -144,7 +143,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/price_tax_label"
-                    android:text="5.06"
+                    android:text='@{String.format("%.2f",0)}'
                     android:textSize="18dp"
                     />
 
@@ -175,7 +174,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/price_total_label"
-                    android:text="68.25"
+                    android:text='@{String.format("%.2f",receipt.priceTotal + 0.00)}'
                     android:textSize="18dp"
                     />
 
