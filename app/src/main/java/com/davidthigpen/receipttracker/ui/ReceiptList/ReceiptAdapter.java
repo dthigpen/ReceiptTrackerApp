@@ -23,14 +23,12 @@ import java.util.List;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ReceiptViewHolder> {
 
-    private Activity host;
     private List<Receipt> mReceipts;
 
     private ReceiptsHome.ReceiptClickListener mReceiptClickListener;
 
 
-    public ReceiptAdapter(Activity activity, List<Receipt> receiptItems, ReceiptsHome.ReceiptClickListener receiptClickListener){
-        host = activity;
+    public ReceiptAdapter(List<Receipt> receiptItems, ReceiptsHome.ReceiptClickListener receiptClickListener){
         setList(receiptItems);
         mReceiptClickListener = receiptClickListener;
 

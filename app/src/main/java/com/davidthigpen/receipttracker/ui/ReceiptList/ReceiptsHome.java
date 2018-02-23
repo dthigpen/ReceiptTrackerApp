@@ -64,7 +64,7 @@ public class ReceiptsHome extends AppCompatActivity {
 
         //populateAndLoad with fake data then load
         populateAndLoad();
-        mReceiptAdapter = new ReceiptAdapter(this,mReceiptList, mReceiptClickListener);
+        mReceiptAdapter = new ReceiptAdapter(mReceiptList, mReceiptClickListener);
         mRecyclerView.setAdapter(mReceiptAdapter);
     }
 
