@@ -66,6 +66,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
     private void showEditItemActivity(ReceiptItem item){
         Intent intent = new Intent(this, EditItemActivity.class);
         intent.putExtra(ITEM_ID_EXTRA,item.getId());
+        Log.d(TAG,item.getItemName());
         intent.putExtra(ITEM_NAME_EXTRA,item.getItemName());
         intent.putExtra(ITEM_PRICE_EXTRA,item.getPrice());
         intent.putExtra(ITEM_QUANTITY_EXTRA,item.getQuantity());
@@ -78,8 +79,9 @@ public class ReceiptItemsActivity extends AppCompatActivity{
         if(requestCode == EDIT_ITEM_REQUEST){
             if(resultCode == RESULT_OK){
                 if(data != null) {
-                    Log.d(TAG,data.getStringExtra(ITEM_NAME_EXTRA));
+
                 }
+                Log.d(TAG,data.getStringExtra(ITEM_NAME_EXTRA));
             }
         }
     }

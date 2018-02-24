@@ -46,6 +46,10 @@ public class ReceiptItem {
         id = UUID.randomUUID().toString();
     }
 
+    @Ignore
+    public ReceiptItem(String id){
+        this.id = id;
+    }
     @NonNull
     public String getId() {
         return id;

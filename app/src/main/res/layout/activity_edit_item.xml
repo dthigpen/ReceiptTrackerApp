@@ -1,111 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.davidthigpen.receipttracker.ui.EditItem.EditItemActivity">
-
-    <LinearLayout
+<layout>
+    <data>
+        <variable
+            name="item"
+            type="com.davidthigpen.receipttracker.data.model.ReceiptItem"/>
+        <variable
+            name="handler"
+            type="com.davidthigpen.receipttracker.ui.Handlers"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="12dp"
-        android:padding="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
-        <TextView
-            android:id="@+id/item_dialog_header"
-            android:text="Item Details"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"/>
+        tools:context="com.davidthigpen.receipttracker.ui.EditItem.EditItemActivity">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
-            <TextView
-                android:id="@+id/item_name_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item Name: "
-                android:textSize="18dp"
-                android:layout_marginRight="10dp"
-                />
-            <EditText
-                android:id="@+id/item_name_edit"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18dp"
-                android:focusedByDefault="false"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/item_price_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Price: $"
-                android:textSize="18dp"
-                android:layout_marginRight="10dp"
-                />
-            <EditText
-                android:id="@+id/item_price_edit"
-                android:inputType="numberDecimal"
-                android:digits="01234567890."
-                android:maxLines="1"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18dp"
-                android:focusedByDefault="false"
-                />
-            <ImageView
-                android:id="@+id/quantity_subtract"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_remove_circle_outline_grey_24dp"
-                android:onClick="onQuantityChanged"/>
-            <TextView
-                android:id="@+id/quantity"
-                android:text="1"
-                android:maxLines="1"
-                android:maxLength="8"
-                android:textSize="18dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <ImageView
-                android:id="@+id/quantity_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_add_circle_outline_grey_24dp"
-                android:onClick="onQuantityChanged"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/item_splitters_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Splitters:"
-            android:textSize="18dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/item_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Item Name: "
+                    android:textSize="18dp"
+                    android:layout_marginRight="10dp"
+                    />
+                <EditText
+                    android:id="@+id/item_name_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18dp"
+                    android:focusedByDefault="false"
+                    android:text="@{item.itemName}"
+                    />
 
-</android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/item_splitters_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Splitters:"
+                android:textSize="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/item_price_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price: $"
+                    android:textSize="18dp"
+                    android:layout_marginRight="10dp"
+                    />
+                <EditText
+                    android:id="@+id/item_price_edit"
+                    android:inputType="numberDecimal"
+                    android:digits="01234567890."
+                    android:maxLines="1"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18dp"
+                    android:focusedByDefault="false"
+                    android:text='@{String.format("%.2f", item.price)}'
+                    />
+
+                <ImageView
+                    android:id="@+id/quantity_subtract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_remove_circle_outline_grey_24dp"
+                    android:onClick="@{handler.decrementQuantity}"
+
+                    />
+                <TextView
+                    android:id="@+id/quantity"
+                    android:maxLines="1"
+                    android:maxLength="8"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@={`` + item.quantity}"
+                    />
+
+                <ImageView
+                    android:id="@+id/quantity_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_add_circle_outline_grey_24dp"
+                    android:onClick="@{handler.incrementQuantity}"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>
