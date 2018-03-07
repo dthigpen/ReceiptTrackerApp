@@ -42,6 +42,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
     private static final String TAG  = "ReceiptItemsActivity";
     public static final int EDIT_ITEM_REQUEST = 3;
     public static final String ITEM_POSITION_EXTRA =  "com.davidthigpen.receiptreader.ITEM_POSITION_EXTRA";
+    public static final String RECEIPT_ID_EXTRA =  "com.davidthigpen.receiptreader.RECEIPT_ID_EXTRA";
     public static final String ITEM_ID_EXTRA =  "com.davidthigpen.receiptreader.ITEM_ID_EXTRA";
     public static final String ITEM_NAME_EXTRA =  "com.davidthigpen.receiptreader.ITEM_NAME_EXTRA";
     public static final String ITEM_PRICE_EXTRA =  "com.davidthigpen.receiptreader.ITEM_PRICE_EXTRA";
@@ -65,6 +66,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
 
     private void showEditItemActivity(ReceiptItem item){
         Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra(item.getReceiptId(),RECEIPT_ID_EXTRA);
         intent.putExtra(ITEM_ID_EXTRA,item.getId());
         Log.d(TAG,item.getItemName());
         intent.putExtra(ITEM_NAME_EXTRA,item.getItemName());

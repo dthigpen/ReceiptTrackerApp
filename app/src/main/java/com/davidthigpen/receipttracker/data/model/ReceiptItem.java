@@ -5,7 +5,11 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.support.annotation.NonNull;
+
+import com.davidthigpen.receipttracker.BR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +21,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
  * Created by david on 2/8/18.
  */
 @Entity
-public class ReceiptItem {
-
+public class ReceiptItem extends BaseObservable{
     @PrimaryKey
     @NonNull
     private String id;
@@ -30,7 +33,9 @@ public class ReceiptItem {
     @ColumnInfo(name = "item_name")
     private String itemName;
     private double price;
+
     private int quantity;
+
     @Ignore
     private List<Splitter> splitters;
 
@@ -69,28 +74,42 @@ public class ReceiptItem {
         this.receiptId = receiptId;
     }
 
+    @Bindable
     public String getItemName() {
         return itemName;
     }
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+        notifyPropertyChanged(BR.itemName);
     }
-
+    @Bindable
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
+        notifyPropertyChanged(BR.price);
 
+    }
+    @Bindable
     public int getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+        notifyPropertyChanged(BR.quantity);
+    }
+
+    public void incrementQuantity(){
+        quantity++;
+        notifyPropertyChanged(BR.quantity);
+    }
+    public void decrementQuantity(){
+        quantity--;
+        notifyPropertyChanged(BR.quantity);
     }
 
     public List<Splitter> getSplitters() {

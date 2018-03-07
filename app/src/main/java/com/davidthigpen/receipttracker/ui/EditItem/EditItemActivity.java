@@ -2,19 +2,17 @@ package com.davidthigpen.receipttracker.ui.EditItem;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.davidthigpen.receipttracker.BR;
 import com.davidthigpen.receipttracker.R;
-import com.davidthigpen.receipttracker.data.model.Receipt;
+import com.davidthigpen.receipttracker.data.database.AppDatabase;
+import com.davidthigpen.receipttracker.data.database.DatabaseHelper;
 import com.davidthigpen.receipttracker.data.model.ReceiptItem;
 import com.davidthigpen.receipttracker.databinding.ActivityEditItemBinding;
-//import com.davidthigpen.receipttracker.ui.Handlers;
 import com.davidthigpen.receipttracker.ui.Handlers;
 import com.davidthigpen.receipttracker.ui.ReceiptDetail.ReceiptItemsActivity;
 
@@ -25,9 +23,11 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
     private ActivityEditItemBinding binding;
     private ReceiptItem item;
     private String itemNameString;
+    private String itemReceiptId;
     private double itemPrice;
     private int quantityNum;
     private ArrayList<String> splitterIds;
+    private DatabaseHelper mDatabaseHelper = new DatabaseHelper(AppDatabase.getInMemoryDatabase(this));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
 
 
         Intent intent = getIntent();
+        itemReceiptId = intent.getStringExtra(ReceiptItemsActivity.RECEIPT_ID_EXTRA);
         String itemId = intent.getStringExtra(ReceiptItemsActivity.ITEM_ID_EXTRA);
         if(itemId != null){
             itemNameString = intent.getStringExtra(ReceiptItemsActivity.ITEM_NAME_EXTRA);
@@ -45,32 +46,23 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
             quantityNum = intent.getIntExtra(ReceiptItemsActivity.ITEM_QUANTITY_EXTRA,1);
             splitterIds = intent.getStringArrayListExtra(ReceiptItemsActivity.ITEM_SPLITTER_IDS_EXTRA);
              item = new ReceiptItem(itemId);
+             item.setReceiptId(itemReceiptId);
              item.setItemName(itemNameString);
              item.setPrice(itemPrice);
              item.setQuantity(quantityNum);
              binding.setItem(item);
+
         }
         binding.setHandler(this);
-
-
-
-//        Toast.makeText(this,itemNameString,Toast.LENGTH_SHORT).show();
-//        binding.itemNameEdit.setText(itemNameString);
-//        binding.itemPriceEdit.setText(String.format("%.2f",itemPrice));
-//        binding.quantity.setText(String.format("" + quantityNum));
-
-
 
     }
 
     @Override
     public void incrementQuantity(View view) {
         ReceiptItem item = binding.getItem();
-        int quantity =item.getQuantity();
-        Log.d("Edit item","" + quantity);
+        int quantity = item.getQuantity();
         item.setQuantity(++quantity);
-        binding.setItem(item);
-        binding.notifyPropertyChanged(BR.item);
+
     }
 
     @Override
@@ -80,21 +72,7 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
         if(quantity > 0){
             ReceiptItem item = binding.getItem();
             item.setQuantity(--quantity);
-            binding.setItem(item);
-            binding.notifyPropertyChanged(BR.item);
-        }
-    }
 
-    private void onQuantityChanged(View view){
-        switch (view.getId()){
-            case R.id.quantity_add:
-                quantityNum = quantityNum <= 0 ? 0 : quantityNum + 1;
-                binding.quantity.setText("" + quantityNum);
-                break;
-            case R.id.quantity_subtract:
-                quantityNum = quantityNum <= 0 ? 0 : quantityNum - 1;
-                binding.quantity.setText("" + quantityNum);
-                break;
         }
     }
 
@@ -114,11 +92,23 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
         switch (item.getItemId()){
             case android.R.id.home:
 //                NavUtils.navigateUpFromSameTask(this);
-                packValues();
+//                packValues();
+                saveItem();
                 finish();
                 return true;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveItem(){
+        AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mDatabaseHelper.getAppDatabase().getReceiptItemDao().update(binding.getItem());
+                return null;
+            }
+        };
+        task.execute();
     }
 }
