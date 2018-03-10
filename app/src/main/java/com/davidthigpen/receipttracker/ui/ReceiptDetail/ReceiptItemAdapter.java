@@ -22,7 +22,6 @@ import java.util.List;
 public class ReceiptItemAdapter extends RecyclerView.Adapter<ReceiptItemAdapter.ItemViewHolder> {
 
     private List<ReceiptItem> mReceiptItems;
-    private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ReceiptItemsActivity.ReceiptItemClickListener mReceiptClickListener;
 

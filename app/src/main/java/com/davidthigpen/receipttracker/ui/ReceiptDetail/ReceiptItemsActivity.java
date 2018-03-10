@@ -16,10 +16,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.davidthigpen.receipttracker.BR;
 import com.davidthigpen.receipttracker.R;
 import com.davidthigpen.receipttracker.data.database.AppDatabase;
 import com.davidthigpen.receipttracker.data.database.DatabaseHelper;
@@ -67,12 +69,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
 
     private void showEditItemActivity(ReceiptItem item){
         Intent intent = new Intent(this, EditItemActivity.class);
-//        intent.putExtra(RECEIPT_ID_EXTRA,item.getReceiptId());
         intent.putExtra(ITEM_ID_EXTRA,item.getId());
-//        intent.putExtra(ITEM_NAME_EXTRA,item.getItemName());
-//        intent.putExtra(ITEM_PRICE_EXTRA,item.getPrice());
-//        intent.putExtra(ITEM_QUANTITY_EXTRA,item.getQuantity());
-//        intent.putStringArrayListExtra(ITEM_SPLITTER_IDS_EXTRA,item.getSplitterIds());
         startActivityForResult(intent,EDIT_ITEM_REQUEST);
     }
 
@@ -90,7 +87,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_receipt_items);
         setSupportActionBar(binding.toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         mReceiptId = intent.getStringExtra(EXTRA_RECEIPT_ID);
         if(mReceiptId != null){
@@ -127,7 +124,10 @@ public class ReceiptItemsActivity extends AppCompatActivity{
 
                 Calendar day = Calendar.getInstance();
                 day.set(i,i1,i2);
-                binding.receiptDateEdit.setText(DateFormatter.dateToString(new Date(day.getTimeInMillis())));
+                Date receiptDate = new Date(day.getTimeInMillis());
+                Receipt receipt = binding.getReceipt();
+                receipt.setReceiptDate(receiptDate);
+                binding.setReceipt(receipt);
             }
         };
         Calendar calendarNow = Calendar.getInstance();
@@ -176,9 +176,30 @@ public class ReceiptItemsActivity extends AppCompatActivity{
 
     }
 
+    public void saveReceipt(){
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mDatabaseHelper.getAppDatabase().getReceiptDao().updateReceipt(binding.getReceipt());
+                return null;
+            }
+        }.execute();
+    }
+
     public interface ReceiptItemClickListener{
         void onItemClicked(ReceiptItem item);
 //        void onItemLongClicked(ReceiptItem item);
             //TODO handle long clicks
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                saveReceipt();
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
