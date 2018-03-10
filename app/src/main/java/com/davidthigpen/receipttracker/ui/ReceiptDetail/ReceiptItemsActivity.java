@@ -183,6 +183,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
                 mDatabaseHelper.getAppDatabase().getReceiptDao().updateReceipt(binding.getReceipt());
                 return null;
             }
+
         }.execute();
     }
 
@@ -197,6 +198,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
         switch (item.getItemId()){
             case android.R.id.home:
                 saveReceipt();
+                setResult(RESULT_OK);
                 finish();
                 return true;
         }

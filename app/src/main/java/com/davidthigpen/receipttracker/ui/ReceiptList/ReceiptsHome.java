@@ -31,7 +31,7 @@ public class ReceiptsHome extends AppCompatActivity {
 
     public static final String TAG = ReceiptsHome.class.getSimpleName();
     public static final String EXTRA_RECEIPT_ID = "com.davidthigpen.receiptreader.RECEIPT_ID";
-
+    public static final int EDIT_RECEIPT_REQUEST = 1;
     private ActivityReceiptsHomeBinding binding;
     private DatabaseHelper mDatabaseHelper;
 
@@ -97,7 +97,17 @@ public class ReceiptsHome extends AppCompatActivity {
     public void viewReceiptDetail(Receipt receipt){
         Intent intent = new Intent(ReceiptsHome.this, ReceiptItemsActivity.class);
         intent.putExtra(EXTRA_RECEIPT_ID,receipt.getId());
-        startActivity(intent);
+        startActivityForResult(intent,EDIT_RECEIPT_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == EDIT_RECEIPT_REQUEST){
+            if(resultCode == RESULT_OK){
+                loadReceiptData();
+                Log.d(TAG,"reloading receipt data");
+            }
+        }
     }
 
     public interface ReceiptClickListener{

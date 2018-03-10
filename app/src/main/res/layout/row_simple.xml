@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="com.davidthigpen.receipttracker.data.util.DateFormatter"/>
         <variable
             name="receipt"
             type="com.davidthigpen.receipttracker.data.model.Receipt"/>
@@ -35,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/store_name"
-        android:text="02/22/2018"
+        android:text="@{DateFormatter.dateToString(receipt.receiptDate)}"
         />
     <TextView
         android:id="@+id/price"
