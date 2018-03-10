@@ -55,6 +55,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
     private DatePickerDialog mDatePickerDialog;
     private String mReceiptId;
     private DatabaseHelper mDatabaseHelper = new DatabaseHelper(AppDatabase.getInMemoryDatabase(this));
+    private int editItemPosition;
 
     private ReceiptItemClickListener mItemClickListener = new ReceiptItemClickListener() {
         @Override
@@ -79,10 +80,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == EDIT_ITEM_REQUEST){
             if(resultCode == RESULT_OK){
-                if(data != null) {
-
-                }
-                Log.d(TAG,data.getStringExtra(ITEM_NAME_EXTRA));
+                loadReceiptItemData(mReceiptId);
             }
         }
     }
@@ -119,6 +117,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
                         .setAction("Action", null).show();
             }
         });
+        editItemPosition = 0;
     }
 
     private void showDatePicker(){

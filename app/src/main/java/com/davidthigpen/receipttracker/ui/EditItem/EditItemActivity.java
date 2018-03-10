@@ -103,6 +103,7 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
             case android.R.id.home:
 //                NavUtils.navigateUpFromSameTask(this);
 //                packValues();
+                setResult(RESULT_OK);
                 saveItem();
                 finish();
                 return true;
