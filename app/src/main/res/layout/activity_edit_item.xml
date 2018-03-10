@@ -48,7 +48,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18dp"
                     android:focusedByDefault="false"
-                    android:text="@{item.itemName}"
+                    android:text="@={item.itemName}"
                     />
 
             </LinearLayout>
@@ -85,7 +85,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18dp"
                     android:focusedByDefault="false"
-                    android:text='@{String.format("%.2f", item.price)}'
+                    android:text="@={`` + item.price}"
                     />
 
                 <ImageView

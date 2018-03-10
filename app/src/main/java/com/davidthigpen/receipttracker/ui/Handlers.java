@@ -10,18 +10,7 @@ import com.davidthigpen.receipttracker.databinding.ActivityEditItemBinding;
  */
 
 public interface Handlers {
-    //    private void incrementQuantity(View view)
-//    {
-//        ActivityEditItemBinding binding = DataBindingUtil.findBinding(view);
-//        int oldVal = binding.getItem().getQuantity();
-//        binding.getItem().setQuantity(++oldVal);
-//    }
-    void incrementQuantity(View view);
 
-    //    private void decrementQuantity(View view){
-//        ActivityEditItemBinding binding = DataBindingUtil.findBinding(view);
-//        int oldVal = binding.getItem().getQuantity();
-//        binding.getItem().setQuantity(oldVal <= 0 ? 0 : --oldVal);
-//    }
+    void incrementQuantity(View view);
     void decrementQuantity(View view);
 }

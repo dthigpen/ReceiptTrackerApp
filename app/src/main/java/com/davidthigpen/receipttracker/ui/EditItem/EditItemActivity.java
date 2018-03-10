@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -28,7 +29,7 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
     private int quantityNum;
     private ArrayList<String> splitterIds;
     private DatabaseHelper mDatabaseHelper = new DatabaseHelper(AppDatabase.getInMemoryDatabase(this));
-
+    private boolean isNewItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +39,32 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
 
 
         Intent intent = getIntent();
-        itemReceiptId = intent.getStringExtra(ReceiptItemsActivity.RECEIPT_ID_EXTRA);
+//        itemReceiptId = intent.getStringExtra(ReceiptItemsActivity.RECEIPT_ID_EXTRA);
         String itemId = intent.getStringExtra(ReceiptItemsActivity.ITEM_ID_EXTRA);
-        if(itemId != null){
-            itemNameString = intent.getStringExtra(ReceiptItemsActivity.ITEM_NAME_EXTRA);
-            itemPrice = intent.getDoubleExtra(ReceiptItemsActivity.ITEM_PRICE_EXTRA,0);
-            quantityNum = intent.getIntExtra(ReceiptItemsActivity.ITEM_QUANTITY_EXTRA,1);
-            splitterIds = intent.getStringArrayListExtra(ReceiptItemsActivity.ITEM_SPLITTER_IDS_EXTRA);
-             item = new ReceiptItem(itemId);
-             item.setReceiptId(itemReceiptId);
-             item.setItemName(itemNameString);
-             item.setPrice(itemPrice);
-             item.setQuantity(quantityNum);
-             binding.setItem(item);
+//        if(itemId != null){
+//            itemNameString = intent.getStringExtra(ReceiptItemsActivity.ITEM_NAME_EXTRA);
+//            itemPrice = intent.getDoubleExtra(ReceiptItemsActivity.ITEM_PRICE_EXTRA,0);
+//            quantityNum = intent.getIntExtra(ReceiptItemsActivity.ITEM_QUANTITY_EXTRA,1);
+//            splitterIds = intent.getStringArrayListExtra(ReceiptItemsActivity.ITEM_SPLITTER_IDS_EXTRA);
+//             item = new ReceiptItem(itemId);
+//             item.setReceiptId(itemReceiptId);
+//             item.setItemName(itemNameString);
+//             item.setPrice(itemPrice);
+//             item.setQuantity(quantityNum);
+//             binding.setItem(item);
+//
+//        }
+        if(itemId != null) {
 
+            isNewItem = false;
+            loadItem(itemId);
+
+        }else{
+            isNewItem = true;
+            binding.setItem(new ReceiptItem());
         }
-        binding.setHandler(this);
 
+        binding.setHandler(this);
     }
 
     @Override
@@ -100,12 +110,32 @@ public class EditItemActivity extends AppCompatActivity implements Handlers{
         }
         return super.onOptionsItemSelected(item);
     }
+    private void loadItem(String itemId){
+        AsyncTask<String,Void,ReceiptItem> task = new AsyncTask<String, Void, ReceiptItem>() {
+            @Override
+            protected ReceiptItem doInBackground(String... itemIds) {
+                return mDatabaseHelper.getAppDatabase().getReceiptItemDao().loadItemById(itemIds[0]);
+            }
 
+            @Override
+            protected void onPostExecute(ReceiptItem item)
+            {
+                binding.setItem(item);
+            }
+        };
+        task.execute(itemId);
+    }
     private void saveItem(){
         AsyncTask<Void,Void,Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                mDatabaseHelper.getAppDatabase().getReceiptItemDao().update(binding.getItem());
+                if(isNewItem){
+                    mDatabaseHelper.getAppDatabase().getReceiptItemDao().insert(binding.getItem());
+                }else {
+                    Log.d("EditItem","Item name: " + binding.getItem().getItemName());
+                    Log.d("EditItem","Item price: " + binding.getItem().getPrice());
+                    mDatabaseHelper.getAppDatabase().getReceiptItemDao().update(binding.getItem());
+                }
                 return null;
             }
         };

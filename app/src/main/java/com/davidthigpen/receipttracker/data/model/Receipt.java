@@ -46,21 +46,7 @@ public class Receipt {
         id = UUID.randomUUID().toString();
         mReceiptItems = new ArrayList<>();
     }
-
-
-    //TODO add quantity
-//    public void addNewItem(String itemName, double price, List<Splitter> splitters){
-//        ReceiptItem receiptItem = new ReceiptItem();
-//        receiptItem.setReceiptId(id);
-//        receiptItem.setItemName(itemName);
-//        receiptItem.setPrice(price);
-//        receiptItem.setSplitters(splitters);
-//        //TODO add new splitters to receipts list of splitters
-//        //TODO keep items up to date, possibly adapt setter method
-//        mReceiptItems.add(receiptItem);
-//        mReceiptItems.add(receiptItem);
-//    }
-
+    
     //getters and setters
     @NonNull
     public String getId() {

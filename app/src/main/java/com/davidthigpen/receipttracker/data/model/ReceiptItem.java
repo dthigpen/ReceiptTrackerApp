@@ -7,6 +7,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
 
 import com.davidthigpen.receipttracker.BR;
@@ -42,8 +43,10 @@ public class ReceiptItem extends BaseObservable{
     @Ignore
     public ArrayList<String> getSplitterIds(){
         ArrayList<String> splitterIds = new ArrayList<>();
-        for(Splitter splitter : splitters){
-            splitterIds.add(splitter.getId());
+        if(splitters != null && splitters.size() > 0) {
+            for (Splitter splitter : splitters) {
+                splitterIds.add(splitter.getId());
+            }
         }
         return splitterIds;
     }
@@ -119,4 +122,5 @@ public class ReceiptItem extends BaseObservable{
     public void setSplitters(List<Splitter> splitters) {
         this.splitters = splitters;
     }
+
 }

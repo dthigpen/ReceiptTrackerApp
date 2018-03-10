@@ -66,13 +66,12 @@ public class ReceiptItemsActivity extends AppCompatActivity{
 
     private void showEditItemActivity(ReceiptItem item){
         Intent intent = new Intent(this, EditItemActivity.class);
-        intent.putExtra(item.getReceiptId(),RECEIPT_ID_EXTRA);
+//        intent.putExtra(RECEIPT_ID_EXTRA,item.getReceiptId());
         intent.putExtra(ITEM_ID_EXTRA,item.getId());
-        Log.d(TAG,item.getItemName());
-        intent.putExtra(ITEM_NAME_EXTRA,item.getItemName());
-        intent.putExtra(ITEM_PRICE_EXTRA,item.getPrice());
-        intent.putExtra(ITEM_QUANTITY_EXTRA,item.getQuantity());
-        intent.putStringArrayListExtra(ITEM_SPLITTER_IDS_EXTRA,item.getSplitterIds());
+//        intent.putExtra(ITEM_NAME_EXTRA,item.getItemName());
+//        intent.putExtra(ITEM_PRICE_EXTRA,item.getPrice());
+//        intent.putExtra(ITEM_QUANTITY_EXTRA,item.getQuantity());
+//        intent.putStringArrayListExtra(ITEM_SPLITTER_IDS_EXTRA,item.getSplitterIds());
         startActivityForResult(intent,EDIT_ITEM_REQUEST);
     }
 
@@ -98,6 +97,7 @@ public class ReceiptItemsActivity extends AppCompatActivity{
         mReceiptId = intent.getStringExtra(EXTRA_RECEIPT_ID);
         if(mReceiptId != null){
             loadReceiptsData(mReceiptId);
+            loadReceiptItemData(mReceiptId);
         }else{
             Log.d(TAG,"Error no receipt id");
         }
@@ -140,6 +140,24 @@ public class ReceiptItemsActivity extends AppCompatActivity{
                 calendarNow.get(Calendar.DAY_OF_MONTH));
         mDatePickerDialog.show();
     }
+
+    public void loadReceiptItemData(final String receiptId){
+        new AsyncTask<Void,Void,List<ReceiptItem>>(){
+            @Override
+            protected List<ReceiptItem> doInBackground(Void... voids) {
+                return mDatabaseHelper.getAppDatabase().getReceiptItemDao().loadAllByReceiptId(receiptId);
+            }
+
+            @Override
+            protected void onPostExecute(List<ReceiptItem> items) {
+                if(items != null) {
+                    mReceiptItems = items;
+                    mReceiptItemsAdapter.setList(items);
+                }
+            }
+        }.execute();
+
+    }
     public void loadReceiptsData(final String receiptId){
         new AsyncTask<Void,Void,Receipt>(){
             @Override
@@ -151,8 +169,8 @@ public class ReceiptItemsActivity extends AppCompatActivity{
             protected void onPostExecute(Receipt receipt) {
                 if(receipt != null) {
                     binding.setReceipt(receipt);
-                    mReceiptItems = receipt.getReceiptItems();
-                    mReceiptItemsAdapter.setList(receipt.getReceiptItems());
+//                    mReceiptItems = receipt.getReceiptItems();
+//                    mReceiptItemsAdapter.setList(receipt.getReceiptItems());
                 }
             }
         }.execute();
